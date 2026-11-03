@@ -1,0 +1,23 @@
+// Restores Lab-labelled fixture nodes. Deletes their incident relationships too.
+MATCH (n:Lab) DETACH DELETE n;
+CREATE CONSTRAINT student_id IF NOT EXISTS FOR (n:Student) REQUIRE n.studentId IS UNIQUE;
+CREATE CONSTRAINT course_id IF NOT EXISTS FOR (n:Course) REQUIRE n.courseCode IS UNIQUE;
+CREATE CONSTRAINT courseoffering_id IF NOT EXISTS FOR (n:CourseOffering) REQUIRE n.offeringId IS UNIQUE;
+CREATE CONSTRAINT enrollment_id IF NOT EXISTS FOR (n:Enrollment) REQUIRE n.enrollmentId IS UNIQUE;
+CREATE (:Student:Lab {studentId: "s01", name: "Ada", isActive: true});
+CREATE (:Student:Lab {studentId: "s02", name: "Ben", isActive: true});
+CREATE (:Student:Lab {studentId: "s03", name: "Cyd", isActive: false});
+CREATE (:Course:Lab {courseCode: "TI", title: "Theoretical Informatics"});
+CREATE (:Course:Lab {courseCode: "FM", title: "Formal Modelling"});
+CREATE (:CourseOffering:Lab {offeringId: "TI26A", term: "WS2026", capacity: 2});
+CREATE (:CourseOffering:Lab {offeringId: "TI26B", term: "WS2026", capacity: 0});
+CREATE (:CourseOffering:Lab {offeringId: "FM26A", term: "WS2026", capacity: 2});
+CREATE (:Enrollment:Lab {enrollmentId: "e01", status: "confirmed"});
+CREATE (:Enrollment:Lab {enrollmentId: "e02", status: "pending"});
+CREATE (:Enrollment:Lab {enrollmentId: "e03", status: "confirmed"});
+MATCH (o:CourseOffering:Lab {offeringId:'TI26A'}), (c:Course:Lab {courseCode:'TI'}) CREATE (o)-[:OF_COURSE]->(c);
+MATCH (o:CourseOffering:Lab {offeringId:'TI26B'}), (c:Course:Lab {courseCode:'TI'}) CREATE (o)-[:OF_COURSE]->(c);
+MATCH (o:CourseOffering:Lab {offeringId:'FM26A'}), (c:Course:Lab {courseCode:'FM'}) CREATE (o)-[:OF_COURSE]->(c);
+MATCH (s:Student:Lab {studentId:'s01'}), (e:Enrollment:Lab {enrollmentId:'e01'}), (o:CourseOffering:Lab {offeringId:'TI26A'}) CREATE (s)-[:HAS_ENROLLMENT]->(e)-[:FOR_OFFERING]->(o);
+MATCH (s:Student:Lab {studentId:'s02'}), (e:Enrollment:Lab {enrollmentId:'e02'}), (o:CourseOffering:Lab {offeringId:'TI26A'}) CREATE (s)-[:HAS_ENROLLMENT]->(e)-[:FOR_OFFERING]->(o);
+MATCH (s:Student:Lab {studentId:'s01'}), (e:Enrollment:Lab {enrollmentId:'e03'}), (o:CourseOffering:Lab {offeringId:'FM26A'}) CREATE (s)-[:HAS_ENROLLMENT]->(e)-[:FOR_OFFERING]->(o);

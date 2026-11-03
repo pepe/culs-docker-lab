@@ -1,0 +1,7 @@
+* text=auto
+
+# Copied into Linux containers, so keep LF even in a Windows checkout
+*.sql text eol=lf
+*.cypher text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf

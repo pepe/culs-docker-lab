@@ -1,0 +1,69 @@
+{
+  "students": [
+    [
+      "s01",
+      "Ada",
+      true
+    ],
+    [
+      "s02",
+      "Ben",
+      true
+    ],
+    [
+      "s03",
+      "Cyd",
+      false
+    ]
+  ],
+  "courses": [
+    [
+      "TI",
+      "Theoretical Informatics"
+    ],
+    [
+      "FM",
+      "Formal Modelling"
+    ]
+  ],
+  "offerings": [
+    [
+      "TI26A",
+      "TI",
+      "WS2026",
+      2
+    ],
+    [
+      "TI26B",
+      "TI",
+      "WS2026",
+      0
+    ],
+    [
+      "FM26A",
+      "FM",
+      "WS2026",
+      2
+    ]
+  ],
+  "enrollments": [
+    [
+      "e01",
+      "s01",
+      "TI26A",
+      "confirmed"
+    ],
+    [
+      "e02",
+      "s02",
+      "TI26A",
+      "pending"
+    ],
+    [
+      "e03",
+      "s01",
+      "FM26A",
+      "confirmed"
+    ]
+  ]
+}
