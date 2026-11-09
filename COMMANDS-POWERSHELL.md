@@ -39,7 +39,7 @@ docker compose images
 
 ## 3. Seed the dedicated lab
 
-These commands replace the sample fixture, so use them before the persistence experiment, not during it.
+These commands replace the sample fixture, so rerunning them resets the sample data.
 
 ```powershell
 docker compose cp .\sql\seed.sql postgres:/tmp/seed.sql
@@ -81,32 +81,7 @@ Neo4j Browser: connection `bolt://localhost:7687`; user `neo4j`; password `Teach
 MATCH p=(n:Lab)-[r]->(m:Lab) RETURN p;
 ```
 
-## 6. Persistence experiment
-
-Add Daria in both databases:
-
-```powershell
-docker compose cp .\sql\persistence-add.sql postgres:/tmp/add.sql
-docker compose exec -T --interactive=false postgres psql -U teacher -d teaching -v ON_ERROR_STOP=1 -f /tmp/add.sql
-docker compose cp .\cypher\persistence-add.cypher neo4j:/tmp/add.cypher
-docker compose exec -T --interactive=false neo4j cypher-shell -u neo4j -p TeachingOnly2026 -d neo4j --format plain -f /tmp/add.cypher
-docker compose --profile web down
-docker compose up -d
-docker compose ps
-```
-
-Wait until both databases are healthy. Container recreation removes the copied files in /tmp, so copy the verification files now:
-
-```powershell
-docker compose cp .\sql\persistence-check.sql postgres:/tmp/check.sql
-docker compose exec -T --interactive=false postgres psql -U teacher -d teaching -v ON_ERROR_STOP=1 -f /tmp/check.sql
-docker compose cp .\cypher\persistence-check.cypher neo4j:/tmp/check.cypher
-docker compose exec -T --interactive=false neo4j cypher-shell -u neo4j -p TeachingOnly2026 -d neo4j --format plain -f /tmp/check.cypher
-```
-
-Both return s04 Daria. Do not rerun seeds between addition and verification. The optional Adminer service is not restarted by the ordinary `up -d`; start the web profile again if needed.
-
-## 7. Separate Compose files
+## 6. Separate Compose files
 
 Use the root file for the class. These alternatives are for independent practice. First stop the root environment, including Adminer:
 

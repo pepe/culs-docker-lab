@@ -39,15 +39,7 @@ Find Student, Enrollment, CourseOffering and Course nodes.
 
 Execute at least one Cypher query file using ISE, even if you primarily use Browser.
 
-## D. Will your data survive?
-
-Predict what `docker compose down` removes. Run the persistence experiment from the command sheet in both databases. It adds student s04 Daria, removes the containers and recreates them.
-
-Do not rerun seeds during this experiment. Query for Daria after both databases are healthy again.
-
-Record what survived, where it was stored, and whether copying compose.yaml to another PC would also copy the data.
-
-## E. Extension: missing data and counts
+## D. Extension: missing data and counts
 
 3. Find students with no Enrollment record at all. This differs from having no confirmed enrollment.
 4. For every offering, show capacity and confirmed enrollment count. Include offerings with zero enrollments.
@@ -57,7 +49,7 @@ Record what survived, where it was stored, and whether copying compose.yaml to a
 ## Submission / exit check
 
 - Your SQL and Cypher for the confirmed-enrollment question.
-- Evidence that Daria survived container recreation in both databases, or a precise description of the obstacle.
+- If something failed, a precise description of the obstacle.
 - One sentence distinguishing image, container and volume.
 
 Stop your lab using the ordinary `down` command when finished. Keep the named volumes unless the teacher explicitly starts a reset exercise.

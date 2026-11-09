@@ -81,7 +81,7 @@ Save your own query files as UTF-8 without BOM. `>` in Windows PowerShell writes
 
 - `compose.yaml`: both DBs, optional Adminer, health checks, named volumes.
 - `postgres/compose.yaml`, `neo4j/compose.yaml`: standalone alternatives.
-- `sql/`, `cypher/`: seeds, starter queries, persistence experiments and a constraint demonstration.
+- `sql/`, `cypher/`: seeds, starter queries and a constraint demonstration.
 - `data/dataset.json`: shared source fixture for checking the two representations.
 - `STUDENT-WORKSHEET.md`: practical tasks.
 - `COMMANDS-POWERSHELL.md`: ISE-compatible commands, startup and troubleshooting.
